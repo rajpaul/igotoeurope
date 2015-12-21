@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block page_css %}
+<style type="text/css">
+table.plan thead tr {
+	background-color: #333;
+	color: #FFF;
+}
+table.plan {
+	border: 1px solid #333;
+}
+table.plan tr td {
+	border-right: 1px solid #333;
+}
+table.plan tr td.custom-border {
+	
+	text-align: center;
+}
+table.payment h1 {
+	font-size: 26px !important;
+	color: #000;
+}
+</style>
+{% endblock %}
+
+{% block full_container %}
+<div class="container">
+	<div class="row">
+			{% include 'top-menu.html' %}
+	</div>	
+	
+	<div class="row mainbody" style="margin-top: 20px;">
+		
+		<div class="col-md-12" ng-controller="GetStartedController">
+			{% block container %}
+				<div class='row'>
+					{% include "steps.html" %}
+				</div>
+				<div class='row'>
+					{% include "subscriber/plan.html" %}
+				</div>
+				<div class='row'>
+					{% include "subscriber/payment-details.html" %}
+				</div>
+			{% endblock container %}
+		</div>
+	</div>
+	
+</div>
+
+{% endblock %}
+
+{% block page_js %}
+
+<script type="text/javascript">
+
+pr.controller('GetStartedController', ['$scope', '$http', '$location', 
+	function ($scope, $http, $location) {
+
+	$scope.init = function() {
+		console.log("hello world!");
+		$scope.ppid = 0;
+		$scope.ccid = 0;
+		$scope.planamount = 0;
+		$scope.netamount = 0;
+		$scope.coupon_discount = 0;
+		$scope.show_coupon_message = false;
+		$scope.coupon_disabled = true;
+
+		$scope.is_this_step1 = false;
+        $scope.is_this_step2 = true;
+        $scope.is_this_step3 = true;
+	}
+	$scope.init();
+
+	$scope.buynow = function(pk) {
+		console.log(pk);
+		var ppid = $("#"+pk).find("option:selected").val();
+		var price = $("#"+pk).find("option:selected").data("price");
+		console.log("PPID :"+ ppid);
+		$scope.ppid = ppid;
+		$scope.planamount = price;
+		$scope.netamount = $scope.planamount - $scope.coupon_discount;
+		$scope.coupon_disabled = false;
+	}
+
+	$scope.applyCoupon = function(coupon) {
+		$scope.show_coupon_message = true;
+		url = "/subscriber/get-coupon/"+coupon+"/"
+		$http.get(url).success(function(data){
+			if (data != 'DoesNotExist') {
+				console.log(data);
+				$scope.ccid = data[0].pk;
+				var discount = data[0].fields.discount_amount
+				var discount_type = data[0].fields.discount_type
+
+				if(discount_type == 0) {
+					$scope.netamount = $scope.planamount - discount;
+					$scope.coupon_message = "You availed $"+ discount +" discount";
+				} else if (discount_type == 1) {
+					var disc = ($scope.planamount * discount)/100;
+					$scope.netamount = $scope.planamount - disc;
+					$scope.coupon_message = "You availed $"+ disc +" discount";
+				}
+			} else {
+				$scope.coupon_message = "Your coupon is not valid for discount";
+			}
+			
+
+		}).error(function(err){
+
+		});
+
+		
+		
+	}
+
+}]);
+
+</script>
+
+{% endblock %}

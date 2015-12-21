@@ -1,0 +1,21 @@
+<div class="list-group" ng-controller="LeftMenuController">
+  <a  class="list-group-item" id='profile-list' href="/supplier/profile/">
+    Profile
+  </a>
+  <div id="collapseOne" class="profile">
+    <a href="/supplier/profile/info/" class="list-group-item">Supplier Information</a>
+    <a href="/supplier/profile/company/info/" class="list-group-item">Company Information</a>
+    <a href="/supplier/profile/company/revenue/" class="list-group-item">Company Revenue</a>
+    <a href="/supplier/profile/company/contacts/" class="list-group-item">Company Contact Info</a>
+    <a href="/supplier/profile/company/licenses/" class="list-group-item">Licenses & Certifications</a>
+    <a href="/supplier/profile/company/products-services/" class="list-group-item">Product & Services</a>
+    <a href="/supplier/profile/company/certification/" class="list-group-item" ng-click="ActiveMenu($event)">Certification</a>
+  </div>
+  <a href="/supplier/search-corporation/" class="list-group-item">Search Corporation</a>
+  <a href="#" class="list-group-item">Membership</a>
+  <a href="#" class="list-group-item">Advanced Search</a>
+  <a href="#" class="list-group-item">Corporation Update</a>
+  <a href="#" class="list-group-item">Capability Statement</a>
+  <a href="/supplier/notification/" class="list-group-item">Notifications</a>
+  <a href="/supplier/submission-status/" class="list-group-item">Submission Status</a>
+</div>

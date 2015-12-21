@@ -1,0 +1,47 @@
+<table class="table certificate">
+<form method="post" action="/supplier/profile/company/certification/">{% csrf_token %}
+<thead>
+	<tr>
+		<th>SR#</th>
+		<th>Certification Description</th>
+		<th>Cert. Number</th>
+		<th>Category</th>
+		<th>Cert Date</th>
+		<th>Expiration Date</th>
+		<th width="100">How many years have you had this certification?</th>
+		<th>Upload certification</th>
+	</tr>
+</thead>
+
+<tbody>
+	
+	<input type="hidden" name="company" value="{{company_id}}">
+	{% for cert in cert_names %}
+	<tr>
+		<td>
+			{{cert.id}}
+			<input type="hidden" name="certificate_name" value="{{cert.id}}">
+		</td>
+		<td width="200">
+			{{cert.cert_name}}
+		</td>
+		<td><input type="text" name="cert_number" class="form-control" value="{{cert.company_cert.cert_number}}"></td>
+		<td><input type="text" name="category" class="form-control" value="{{cert.company_cert.category}}"></td>
+		<td><input type="text" name="certification_date" class="form-control datetime" value="{{cert.company_cert.certification_date}}"></td>
+		<td><input type="text" name="expire_date" class="form-control datetime" value="{{cert.company_cert.expire_date}}"></td>
+		<td><input type="text" name="certificate_duration" class="form-control" value="{{cert.company_cert.certificate_duration}}"></td>
+		<td><input type="file" name="upload_certificate" class="form-control" value="{{cert.company_cert.upload_certificate}}"></td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="8">
+			<button class="btn btn-primary">Submit & Continue</button>
+		</td>
+	</tr>
+	
+</tbody>
+
+	
+
+</form>
+</table>

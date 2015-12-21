@@ -1,0 +1,113 @@
+<div class="table-responsive">
+  <div class="alert alert-info tb-header">List of Corporations (as per above selected criteria)</div>
+
+
+	<form name="searched_form" id='searched_buyers'>{% csrf_token %}
+  <table class="table table-striped table-hover  table-bordered">
+  	<thead>
+  		<tr>
+  			<th width=7%><div align='center'>Sr.#<div></th>
+  			<th width=45%>Corporation Name</th>
+  			<th width=38%>Login URL</th>
+  			<th width=10%><div align='center'>Select</div></th>
+  		</tr>  		
+  	</thead>
+  	<tbody>
+      {% if buyers %}
+    		{% for buyer in buyers %}
+    			<tr>
+    				<td><div align='center'> {{ forloop.counter }} </div> </td>
+    				<td> {{ buyer.company_name }} </td>
+    				<td> {{ buyer.login_url }} </td>
+    				<td>
+              <div align='center'> 
+                <input type='checkbox' name='buyers' value="{{ buyer.pk }}">
+              </div>
+            </td>
+    			</tr>
+    		{% endfor %}
+      {% else %}
+        <tr>
+            <td colspan=4 class="danger" width=100%><div align='center'> No buyers found for your search </div> </td>
+        </tr>
+      {% endif %}
+  	</tbody>
+		<tfoot>
+			<tr>
+				<td colspan=4>
+					<button type="submit" id='save' class="btn btn-primary pull-right">Save Selected Corporations</button>
+				</td>
+			</tr>
+		</tfoot>    
+  </table>
+	</form>
+
+</div>
+  {% if no_buyer_found %}
+    <div class="alert alert-danger tb-header">
+      Following buyers name you manually added are not availale in our system
+    </div>
+    <table class="table table-striped table-hover  table-bordered">
+      <tr>
+        <th width=10%><div align='center'>Sr.#<div></th>
+        <th> Buyers name</th>
+      </tr>
+    {% for byer in no_buyer_found %}
+      <tr >
+        <td class="danger" width=10%><div align='center'> {{ forloop.counter }} </div> </td>
+        <td class="danger">{{ byer }} </td>
+        
+      </tr>
+    {% endfor %}
+    </table>
+
+  {% else %}
+
+  {% endif %}
+
+<script type="text/javascript">
+(function(){
+
+  $("button#save").on('click', function(event) {
+    // alert('hello');
+    
+    selectedbuyers = $("form#searched_buyers").serialize();
+    console.log(selectedbuyers);
+    
+    $.ajax({
+        type: "POST",
+        url: "/supplier/save_buyers/",
+        data: {
+          'selectedbuyers': selectedbuyers,
+          
+        },
+
+        success: function(data) {
+          
+          if(data=='No') {
+
+            alert('You have not selected any buyers');
+
+          } else if(data == 'NODELETE') {
+
+            alert('You have this buyers already!');
+
+          } else {
+
+            $("#selectedbuyers tbody").html(data);
+            $("#buyers").hide();
+            $("#selectedbuyers .no-buyers-row").hide();
+
+          }         
+          
+        },
+        error: function(result) {
+          alert('Error')
+        }
+    });
+    
+    event.preventDefault();
+  });
+
+})(jQuery)
+</script>

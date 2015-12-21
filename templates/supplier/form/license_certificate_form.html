@@ -1,0 +1,107 @@
+<div class="row" ng-controller="CompLicenseController">
+<div class="col-md-10">
+	<form novalidate name="comp_license" action="{% url 'company-products-services' %}" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{ supplier.id }}">
+    <input type="hidden" name="company" id="id_company" value="{{ company.id }}">
+		<table class="table">
+		<tbody>
+			<tr>
+				<th width="200"><label for="id_insurance_limit">Insurance Limit</label></th>
+				<td>
+					<input type="text" id="id_insurance_limit" name="insurance_limit" ng-model="comp_license.insurance_limit" class="form-control" value="{[{comp_license.insurance_limit}]}" required autocomplete="off"> 
+
+					<div ng-show="comp_license.$dirty && comp_license.insurance_limit.$error.required && comp_license.insurance_limit.$touched">
+						<p  class="bg-warning">Please enter Insurance limit.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_expiration_date">Expiration date</label></th>
+				<td>
+					<input type="date" id="id_expiration_date" name="expiration_date" ng-model="comp_license.expiration_date" class="form-control" placeholder="Please put 'N/A' if no value available" value="{[{comp_license.expiration_date}]}" required autocomplete="off"> 
+
+					<div ng-show="comp_license.$dirty && comp_license.expiration_date.$error.required && comp_license.expiration_date.$touched">
+						<p  class="bg-warning">Please select Expiration date.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_insurance_provider">Insuration provider</label></th>
+				<td>
+					<input type="text" id="id_insurance_provider" name="insurance_provider" ng-model="comp_license.insurance_provider" class="form-control" placeholder="Please put 'N/A' if no value available" value="{[{comp_license.insurance_provider}]}" required autocomplete="off"> 
+
+					<div ng-show="comp_license.$dirty && comp_license.insurance_provider.$error.required && comp_license.insurance_provider.$touched">
+						<p  class="bg-warning">Please enter your Insuration provider.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_business_license">Business License</label></th>
+				<td>
+					<input type="file" id="id_business_license" name="business_license" ng-model="comp_license.business_license" class="form-control" placeholder="Please put 'N/A' if no value available" value="{[{comp_license.business_license}]}" required autocomplete="off"> 
+
+					<div ng-show="comp_license.$dirty && comp_license.business_license.$error.required && comp_license.business_license.$touched">
+						<p  class="bg-warning">Please upload your business license.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_geographical_service_area">Geographical service area</label></th>
+				<td>
+					<input type="text" id="id_geographical_service_area" name="geographical_service_area" ng-model="comp_license.geographical_service_area" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_license.geographical_service_area}]}" required autocomplete="off">
+
+					<div ng-show="comp_license.$dirty && comp_license.geographical_service_area.$error.required && comp_license.geographical_service_area.$touched">
+						<p  class="bg-warning">Please enter your SSN.</p>
+					</div> 
+				</td>
+			</tr>
+
+			<tr>
+				<th><label for="id_has_online_catalog">Has online catalog?</label></th>
+				<td>
+                    <input type="radio" name="has_online_catalog" id="id_has_online_catalog_2" ng-model="comp_license.has_online_catalog" value="2"> Yes
+					<input type="radio" name="has_online_catalog" id="id_has_online_catalog_3" ng-model="comp_license.has_online_catalog" value="3"> No
+					<input type="hidden" name="has_online_catalog" value="{[{comp_license.has_online_catalog}]}">
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_can_sell_online">Can sell online?</label></th>
+				<td>
+                    <input type="radio" name="can_sell_online" id="id_can_sell_online_2" ng-model="comp_license.can_sell_online" value="2"> Yes
+					<input type="radio" name="can_sell_online" id="id_can_sell_online_3" ng-model="comp_license.can_sell_online" value="3"> No
+					<input type="hidden" name=can_sell_online" value="{[{comp_license.can_sell_online}]}">
+				</td>
+			</tr>
+            <tr>
+                <th><label for="id_accepts_credit_card">Accepts credit card?</label></th>
+                <td>
+                    <input type="radio" name="accepts_credit_card" id="id_accepts_credit_card_2" ng-model="comp_license.accepts_credit_card" value="2"> Yes
+					<input type="radio" name="accepts_credit_card" id="id_accepts_credit_card_3" ng-model="comp_license.accepts_credit_card" value="3"> No
+					<input type="hidden" name=accepts_credit_card" value="{[{comp_license.accepts_credit_card}]}">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id_accepts_credit_card">Is Edi capable?</label></th>
+                <td>
+                    <input type="radio"  name="edi_capable" id="id_is_edi_capable_2" ng-model="comp_license.is_edi_capable" value="2"> Yes
+					<input type="radio"  name="edi_capable" id="id_is_edi_capable_3" ng-model="comp_license.is_edi_capable" value="3"> No
+					<input type="hidden" name=is_edi_capable" value="{[{comp_license.is_edi_capable}]}">
+                </td>
+            </tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+		</tfoot>
+
+		</table>
+	</form>
+</div>
+</div>
+

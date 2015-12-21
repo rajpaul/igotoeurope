@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block logintop %}
+{% endblock %}
+
+{% block container %}
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="jumbotron">
+			<form name="loginForm" action="/subscriber/login/" method="post">{% csrf_token %}
+				<table class="table">
+					<tr>
+						<td colspan="3"><span class="tableHeadingTxt">Login to Procurement Registration</span></td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" class="form-control" name="username" placeholder="Username"/>
+						</td>
+						<td>
+							<input type="password" class="form-control" name="password" placeholder="Password"/>
+						</td>
+						<td>
+							<button class="btn btn-primary" type="submit">Sign In</button>
+						</td>
+
+					</tr>
+					<tr>
+						<td colspan="3"><a href="/subscriber/forget-password/" id="forgotPassword">Forgot Password</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>		
+	</div>
+</div>
+
+{% endblock container %}

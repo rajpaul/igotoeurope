@@ -1,0 +1,80 @@
+{% load compress %}
+<!DOCTYPE html>
+<html ng-app="pr">
+<head>
+	<title>
+		{% block title %} {{site_name}} {%endblock title %}
+	</title>
+
+
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/static/css/multiselect.css" />
+	<link rel="stylesheet" href="/static/css/jquery-ui.min.css" />
+	<script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/angular.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.multi-select.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+
+    	<link rel="stylesheet/less" type="text/css" media="all" href="/static/less/style.less" />
+    	<script type="text/javascript" src="/static/js/less.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/style-2.css" />
+</head>
+<body>
+{% block page_css %}
+{% endblock %}
+<div class="container">
+<div class="row">
+{% block header %}
+	
+{% endblock %}
+</div>
+{% block messages %}
+	
+	{% if messages %}
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2" style="text-align: center;">
+			    {% for message in messages %}
+			    <p class="bg-danger message" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+			    	{{ message }}
+			    </p>
+			    {% endfor %}
+		</div>
+	</div>
+	{% endif %}
+{% endblock %}
+<div class="row">
+{% block full_container %}
+{% endblock %}
+</div>
+
+<div class="row">
+{% block footer %}
+{% endblock %}
+</div>
+
+
+
+
+<div class="row">
+{% block site_js %}
+
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}
+</div>
+
+<script type="text/javascript">
+
+(function(e){
+    setTimeout(function() {
+      $('#message').fadeOut();
+    }, 3000);
+
+    $( ".datetime" ).datepicker();
+
+})(jQuery)
+</script>
+</body>
+</html>

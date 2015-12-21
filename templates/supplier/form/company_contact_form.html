@@ -1,0 +1,166 @@
+<div class="row" ng-controller="CompContactController">
+<div class="col-md-10">
+	<form noviolate name="comp_contact_form" action="/supplier/profile/company/contacts/" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{supplier.id}}">
+	<input type="hidden" name="company" id="id_company" value="{{company.id}}">
+		<table class="table">
+		<tbody id="company_contact">
+			<tr>
+				<th width="250">
+					<label for="id_name">Contact Name</label>
+				</th>
+				<td>
+					<input type="text" class="form-control" name="name" id="id_name" value="{[{comp_contact.name}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.name.$error.required && comp_contact_form.name.$touched">
+							<p  class="bg-warning">Please enter contact name.</p>
+						</div>
+				</td>
+				
+			</tr>
+			<tr>
+				<th width="250">
+					<label for="id_title">Contact Title</label>
+				</th>
+				<td>
+					<input type="text" class="form-control" name="title" id="id_title" value="{[{comp_contact.title}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.title.$error.required && comp_contact_form.title.$touched">
+							<p  class="bg-warning">Please enter contact title.</p>
+						</div>
+				</td>
+				
+			</tr>
+
+			<tr>
+				<th width="250">
+					<label for="id_phone">Contact Phone</label>
+				</th>
+				<td>
+					<table class="table innertable">
+						<tr>
+							<td width="70%">
+								<input type="text" class="form-control" name="phone" id="id_phone" value="{[{comp_contact.phone}]}">
+								<div ng-show="comp_contact_form.$dirty && comp_contact_form.phone.$error.required && comp_contact_form.phone.$touched">
+									<p  class="bg-warning">Please enter contact phone.</p>
+								</div>	
+							</td>
+							<td>
+								Ext.
+							</td>
+							<td>
+								<input type="text" class="form-control" name="phone_ext" id="id_phone_ext" value="{[{comp_contact.phone_ext}]}">	
+							</td>
+						</tr>
+					</table>
+					
+				</td>
+				
+			</tr>
+
+			<tr>
+				<th width="250">
+					<label for="id_fax">Fax</label>
+				</th>
+				<td>
+					<input type="text" class="form-control" name="fax" id="id_fax" value="{[{comp_contact.fax}]}">
+				</td>
+				
+			</tr>
+			<tr>
+				<th><label for="id_email">Email</label></th>
+				<td>
+					<input type="email" id="id_email" name="email" ng-model="comp_contact.email" class="form-control" value="{[{comp_contact.email}]}" required autocomplete="off"> 
+						
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.email.$error.required && comp_contact_form.email.$touched">
+							<p  class="bg-warning">Please enter contact email id.</p>
+						</div>
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.email.$error.email && comp_contact_form.email.$touched">
+							<p  class="bg-warning">Please enter a valid email </p>
+						</div>
+				</td>
+			</tr>
+			</tbody>
+			</table>
+			<tr>
+				<td colspan="2" class="bg-info">
+					References
+				</td>
+			</tr>
+			<table class="table" style="border: 1px solid #CCC;">
+				<tr>
+					<th width="250">
+						<label for="id_company_name">Company Name</label>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="company_name" id="id_company_name" value="{[{comp_contact.company_name}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.name.$error.required && comp_contact_form.name.$touched">
+							<p  class="bg-warning">Please enter company name.</p>
+						</div>
+					</td>
+					
+				</tr>
+
+				<tr>
+					<th width="250">
+						<label for="id_contact_name">Contact Name</label>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="contact_name" id="id_contact_name" value="{[{comp_contact.contact_name}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.contact_name.$error.required && comp_contact_form.contact_name.$touched">
+							<p  class="bg-warning">Please enter contact name.</p>
+						</div>
+					</td>
+					
+				</tr>
+
+				<tr>
+					<th width="250">
+						<label for="id_phone">Phone</label>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="phone" id="id_phone" value="{[{comp_contact.phone}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.phone.$error.required && comp_contact_form.phone.$touched">
+							<p  class="bg-warning">Please enter phone number</p>
+						</div>
+					</td>
+					
+				</tr>
+
+				<tr>
+					<th width="250">
+						<label for="id_email">Email</label>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="email" id="id_email" value="{[{comp_contact.email}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.email.$error.required && comp_contact_form.email.$touched">
+							<p  class="bg-warning">Please enter email id</p>
+						</div>
+					</td>
+					
+				</tr>
+
+				<tr>
+					<th width="250">
+						<label for="id_services_provided">Service Provided</label>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="services_provided" id="id_services_provided" value="{[{comp_contact.services_provided}]}"> 
+						<div ng-show="comp_contact_form.$dirty && comp_contact_form.services_provided.$error.required && comp_contact_form.services_provided.$touched">
+							<p  class="bg-warning">Please enter the service provided</p>
+						</div>
+					</td>
+					
+				</tr>
+			</table>
+
+		<table class="table">
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+
+		</table>
+	</form>
+</div>
+</div>

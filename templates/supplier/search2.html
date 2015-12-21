@@ -1,0 +1,10 @@
+<div class="row" ng-controller="SearchPageController">
+<div class="col-md-12">
+	<h2>Search corporation</h2>
+	<select id='corp-select' multiple='multiple' name="ps_categories" ng-model="comp.categories">
+		{% for cat in categories %}
+			<option value="{{cat.id}}" {% if cat in selected_categories %} selected {% endif %}>{{cat}}</option>
+		{% endfor %}
+	</select>
+</div>
+</div>

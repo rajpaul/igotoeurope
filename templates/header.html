@@ -1,0 +1,40 @@
+<header class='row'>
+	<div class="col-md-6">
+		<!-- Header Start -->
+		<div class="logo">
+			<img src="/static/images/logo.png" alt="Procurement System">
+		</div>
+	</div>
+	{% block logintop %}
+	<div class="col-md-6">
+		<div class="loginWrapper">
+		{% if not user.is_authenticated %}
+			<form name="loginForm" action="/subscriber/login/" method="post">{% csrf_token %}
+				<table class="table">
+					<tr>
+						<td colspan="3"><span class="tableHeadingTxt">Login to Procurement Registration</span></td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" class="form-control" name="username" placeholder="Username"/>
+						</td>
+						<td>
+							<input type="password" class="form-control" name="password" placeholder="Password"/>
+						</td>
+						<td>
+							<button class="btn btn-primary" type="submit">Sign In</button>
+						</td>
+
+					</tr>
+					<tr>
+						<td colspan="3"><a href="/subscriber/forget-password/" id="forgotPassword">Forgot Password</a></td>
+					</tr>
+				</table>
+			</form>
+		{% else %}
+			<a href="/subscriber/logout/"> Logout </a>
+		{% endif %}
+		</div>
+	</div>
+	{% endblock logintop %}
+</header>

@@ -1,0 +1,59 @@
+{% if saved_buyers %}
+{% for selectedbuyer in saved_buyers %}
+	<tr>
+		<td><div align='center'> {{ forloop.counter }} </div> </td>
+    <td> {{ selectedbuyer.company_name }}  </td>
+    <td> {{ selectedbuyer.login_url }}  </td>
+    <td>
+      <div align='center'> 
+        <a href="#" class='deletebuyer btn btn-danger' data-bid="{{ selectedbuyer.pk}}" value="{{ selectedbuyer.pk}}">D</a> 
+      </div> 
+    </td>
+		
+	</tr>
+{% endfor %}
+{% else %}
+<tr class='no-buyers-row'>
+  <td colspan=4>
+    <div align='center'>
+      <div class="alert alert-danger">
+        You have no saved buyers.
+      </div>
+    </div> 
+  </td>
+</tr>
+{% endif %}
+
+
+<script type="text/javascript">
+(function(){
+
+  $("a.deletebuyer").on('click', function(event){
+    event.preventDefault();
+    bid = $(this).attr('value');
+    console.log(bid);
+  //el = $(this).closest('tr');
+
+    $.ajax({
+        type: "POST",
+        url: "/supplier/delete_buyer/",
+        data: {
+          'bid': bid,
+        },
+
+        success: function(data) {
+          console.log("buyer removed with id "+ data);
+          $("a[data-bid='"+data+"']").closest("tr").remove();
+
+        },
+        error: function(result) {
+          alert('error');
+        }
+    });
+        
+  
+  });
+
+})(jQuery)
+
+</script>

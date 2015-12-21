@@ -1,0 +1,73 @@
+<div class="row" ng-controller="CompProServiceController">
+<div class="col-md-10">
+	<form novalidate name="comp_pro_service" action="{% url 'company-products-services' %}" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{ supplier.id }}">
+    <input type="hidden" name="company" id="id_company" value="{{ company.id }}">
+		<table class="table">
+		<tbody>
+			<tr>
+				<th width="200"><label for="id_naics_code">Naics Code</label></th>
+				<td>
+					<input type="text" id="id_naics_code" name="naics_code" ng-model="comp_pro_service.naics_code" class="form-control" value="{[{comp_pro_service.naics_code}]}" required autocomplete="off">
+
+					<div ng-show="comp_pro_service.$dirty && comp_pro_service.naics_code.$error.required && comp_pro_service.naics_code.$touched">
+						<p  class="bg-warning">Please enter Naics Code.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_sic_code">Sic code</label></th>
+				<td>
+					<input type="text" id="id_sic_code" name="sic_code" ng-model="comp_pro_service.sic_code" class="form-control" placeholder="Please put 'N/A' if no value available" value="{[{comp_pro_service.sic_code}]}" required autocomplete="off">
+
+					<div ng-show="comp_pro_service.$dirty && comp_pro_service.sic_code.$error.required && comp_pro_service.sic_code.$touched">
+						<p  class="bg-warning">Please enter your Sic code.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_unspsc_code">Unspsc Code</label></th>
+				<td>
+					<input type="text" id="id_unspsc_code" name="unspsc_code" ng-model="comp_pro_service.unspsc_code" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_pro_service.unspsc_code}]}" required autocomplete="off">
+
+					<div ng-show="comp_pro_service.$dirty && comp_pro_service.unspsc_code.$error.required && comp_pro_service.unspsc_code.$touched">
+						<p  class="bg-warning">Please enter your Unspsc Code.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_nigp_code">Nigp code</label></th>
+				<td>
+					<input type="text" id="id_nigp_code" name="nigp_code" ng-model="comp_pro_service.nigp_code" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_pro_service.nigp_code}]}" required autocomplete="off">
+
+					<div ng-show="comp_pro_service.$dirty && comp_pro_service.nigp_code.$error.required && comp_pro_service.nigp_code.$touched">
+						<p  class="bg-warning">Please enter your Nigp code.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_cage_code">Cage code</label></th>
+				<td>
+					<input type="text" id="id_cage_code" name="cage_code" ng-model="comp_pro_service.cage_code" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_pro_service.cage_code}]}" required autocomplete="off">
+
+					<div ng-show="comp_pro_service.$dirty && comp_pro_service.cage_code.$error.required && comp_pro_service.cage_code.$touched">
+						<p  class="bg-warning">Please enter your Cage code.</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+		</tfoot>
+
+		</table>
+	</form>
+</div>
+</div>
+

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block container %}
+	{% include "steps.html" %}
+
+    {% include "supplier/submission-status.html" %}    
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+
+pr.controller('SubpplierSubmissionController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Supplier Submission Status controller...");
+    }
+    $scope.init();
+
+}]);
+
+</script>
+{% endblock %}

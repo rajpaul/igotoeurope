@@ -1,0 +1,24 @@
+<table class="table" ng-controller="SubpplierSubmissionController">
+<thead>
+	<tr>
+		<th>Buyer ID</th>
+		<th>Buyer Name</th>
+		<th>Registration URL</th>
+		<th>Submission Status</th>
+		<th>Submission Date</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="buyer in buyers">
+		<td>{[{ buyer.id }]}</td>
+		<td>{[{ buyer.company_name }]}</td>
+		<td>{[{ buyer.buyer.registration_url }]}</td>
+		<td>{[{ buyer.selection_date }]}</td>
+		<td>{[{ buyer.submission_status }]}</td>
+		<td>{[{ buyer.submission_date }]}</td>
+	</tr>
+	<tr ng-show="!buyers">
+		<td colspan="6">No buyers yet to submission</td>
+	</tr>
+</tbody>
+</table>

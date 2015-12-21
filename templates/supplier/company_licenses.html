@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block container %}
+	{% include "steps.html" %}
+	{% include "supplier/form/license_certificate_form.html" %}	
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+
+pr.controller('CompLicenseController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Supplier Company license controller...");
+        var sup_id = $("#id_supplier").val();
+        var url = "/supplier/profile/company/licenses/api/"+sup_id+"/"
+        console.log("Supplier ID => " + sup_id)
+        console.log("Url => " + url)
+        $http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.comp_license = data;
+
+        }).error(function() {
+            console.log("no company info")
+        });
+    }
+    $scope.init();
+
+}]);
+
+</script>
+{% endblock %}

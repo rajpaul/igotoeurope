@@ -1,0 +1,77 @@
+<div class="row" style="height:400px;">
+	<div class="col-md-7">
+		<div class="infoWrapper">
+			<h2>Procurement Registration Solution</h2>
+			<p>Register on hundreds of corporate portals in the time it takes you 
+			to finish a cup of coffee. Get infront of thousands of businesses, 
+			local or global - with the click of a button.</p>
+			
+			<div class="CounterWrapper">
+				<span class="count">13,848</span>
+				<span class="countText">Users registered and still counting</span>
+			</div>
+			
+			
+		</div>
+	</div>
+	{% if not user.is_authenticated %}
+	<div class="col-md-5" ng-controller="RegistrationController">
+		{% include 'registration.html' %}	
+	</div>
+	{% endif %}
+</div>
+
+<div class="row" style="margin-top:50px;">
+	<article class="col-md-4">
+		<h3 id="benefitsHeading">Key benefits of Procurement Registration</h3>
+						
+		<div class="itemImg"><img src="/static/images/img1.png"></div>
+		<div class="itemText"><p>View corporate profiles and register to corporate portals at the click of a button</p></div>
+						
+		<div class="itemImg"><img src="/static/images/img3.png"></div>
+		<div class="itemText"><p>Detailed company profile = targeted qualified buyer matches</p></div>
+						
+		<div class="itemImg"><img src="/static/images/img5.png"></div>
+		<div class="itemText"><p>Communicate directly with the buyers and category managers and host live meetings</p></div>
+						
+	</article>
+	<article class="col-md-4">
+		<div class="itemImg">
+			<img src="/static/images/img2.png">
+		</div>
+		<div class="itemText">
+			<p>Upload all your information including company information, certifications and licenses commodity codes and more </p>
+		</div>
+	
+		<div class="itemImg">
+			<img src="/static/images/img4.png">
+		</div>
+		<div class="itemText">
+			<p>Deep niche research on corporations including size, spending and more</p>
+		</div>
+		
+	</article>
+	<article class="col-md-4" style="padding-right: 0px;">
+		<div class="videoBox">
+			<a href="http://www.youtube.com/embed/4qbWsvqPfG0?rel=0&amp;wmode=transparent" class="youtube cboxElement">
+        	<img src="http://procurementregistration.com/pr01/pr01/system/assets/images/v3.jpg" border="0" style="width: 100%;"></a>
+			<div class="testDrive">
+				<a href="#" >Take a Free Testdrive</a>
+			</div>
+		</div>
+	</article>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		
+	</div>
+	<div class="col-md-4" style="padding-right: 0px;">
+		<div class="videoBox">
+			<a href="http://www.youtube.com/embed/qZ6OwBzs6FY?rel=0&amp;wmode=transparent" class="youtube cboxElement">
+			<img src="http://procurementregistration.com/pr01/pr01/system/assets/images/v2.jpg" border="0" style="width: 100%;"></a>
+			<div class="testDrive">
+				<a href="#" >Take a Free Testdrive</a>
+			</div>
+		</div>
+	</div>
+</div>

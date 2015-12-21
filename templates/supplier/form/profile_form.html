@@ -1,0 +1,192 @@
+<div class="row" ng-controller="SupplierProfileController">
+<div class="col-md-10">
+	<form novalidate name="profile_form" action="/supplier/profile/info/" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{supplier.id}}">
+		<table class="table">
+		<tbody>
+			<tr>
+				<th width="200"><label for="salutation">Salutation</label></th>
+				<td>
+					<select class="form-control" id="salutation" ng-model="supplier.salutation" name="salu" required>
+						{% for sal in salutations %}
+							<option value="{{sal.0}}" >{{sal.1}}</option>
+						{% endfor %}
+					</select>
+					<input type="hidden" class="form-control" name="salutation" value="{[{supplier.salutation}]}">
+					<div ng-show="profile_form.$dirty && profile_form.salutation.$error.required && profile_form.salutation.$touched">
+						<p  class="bg-warning">Please select your salutation.</p>
+					</div> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="first_name">First Name</label></th>
+				<td>
+					<input type="text" id="id_first_name" ng-model="supplier.first_name" name="first_name" class="form-control" value="{[{supplier.first_name}]}" required autocomplete="off">
+					
+					<div ng-show="profile_form.first_name.$error.required && profile_form.$dirty && profile_form.first_name.$touched">
+						<p class="bg-danger">Please enter your first name.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="last_name">Last Name</label></th>
+				<td>
+					<input type="text" id="_id_last_name" name="last_name" ng-model="supplier.last_name" class="form-control" value="{[{supplier.last_name}]}" required autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.last_name.$error.required && profile_form.last_name.$touched">
+						<p class="bg-danger">Please enter your last name.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="position">Position</label></th>
+				<td>
+					<input type="text" id="id_position" name="position" class="form-control" ng-model="supplier.position" value="{[{supplier.position}]}" autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.position.$error.required && profile_form.position.$touched">
+						<p class="bg-danger">Please enter your position.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="phone_number">Phone Number</label></th>
+				<td>
+					<input type="text" id="id_phone_number" name="phone_number" ng-model="supplier.phone_number" class="form-control" value="{[{supplier.phone_number}]}" autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.phone_number.$error.required && profile_form.phone_number.$touched">
+						<p class="bg-danger">Please enter your phone number.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="fax_number">Fax Number</label></th>
+				<td>
+					<input type="text" id="id_fax_number" name="fax_number" ng-model="supplier.fax_number" class="form-control" value="{[{supplier.fax_number}]}" autocomplete="off">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="cell_number">Cell Number</label></th>
+				<td>
+					<input type="text" id="id_cell_number" name="cell_number" ng-model="supplier.cell_number" class="form-control" value="{[{supplier.cell_number}]}" required autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.cell_number.$error.required && profile_form.cell_number.$touched">
+						<p class="bg-danger">Please enter your cell number.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="contact_email">Contact Email</label></th>
+				<td>
+					<input type="email" id="id_contact_email" name="contact_email" ng-model="supplier.contact_email" class="form-control" value="{[{supplier.contact_email}]}" required autocomplete="off">
+
+					<div ng-show="profile_form.$dirty && profile_form.contact_email.$error.required && profile_form.contact_email.$touched">
+						<p class="bg-danger">Please enter your contact email.</p>
+					</div>
+
+					<div ng-show="profile_form.$dirty && profile_form.contact_email.$error.email && profile_form.contact_email.$touched">
+						<p class="bg-danger">Please enter a valid email.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="contact_address">Contact Address</label></th>
+				<td>
+					<textarea id="id_contact_address" name="contact_address" ng-model="supplier.contact_address" class="form-control" value="{[{supplier.contact_address}]}">
+						
+					</textarea>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="country">Country</label></th>
+				<td>
+					<input type="text" id="id_country" name="country" ng-model="supplier.country" class="form-control" value="{[{supplier.country}]}" required autocomplete="off">
+
+					<div ng-show="profile_form.$dirty && profile_form.country.$error.required && profile_form.country.$touched">
+						<p class="bg-danger">Please enter your country name.</p>
+					</div> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="state">State</label></th>
+				<td>
+					<input type="text" id="id_state" name="state" class="form-control" ng-model="supplier.state" value="{[{supplier.state}]}"required autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.state.$error.required && profile_form.state.$touched">
+						<p class="bg-danger">Please enter your state.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="city">City</label></th>
+				<td>
+					<input type="text" id="id_city" name="city" class="form-control" ng-model="supplier.city" value="{[{supplier.city}]}" required autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.city.$error.required && profile_form.city.$touched">
+						<p class="bg-danger">Please enter your city.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_zip_code">Zip Code</label></th>
+				<td>
+					<input type="number" id="id_zip_code" name="zip_code" ng-model="supplier.zip_code" class="form-control" value="{[{supplier.zip_code}]}" required autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.zip_code.$error.required && profile_form.zip_code.$touched">
+						<p class="bg-danger">Please enter your zip code.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="method_of_notification">Method Of Notification</label></th>
+				<td>
+					<input type="radio" name="notification" value="0" ng-model="supplier.notification" required> Both
+					<input type="radio" name="notification"  value="1" ng-model="supplier.notification" required> SMS Only
+					<input type="radio" name="notification"  value="2" ng-model="supplier.notification" required> Email Only
+					
+					<input type="hidden" id="id_method_of_notification" name="method_of_notification"
+					value="{[{notification}]}"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.notification.$error.required">
+						<p class="bg-danger">Please your prefered notification method</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2" class="bg-danger">
+					Your personal choice
+				</th>
+			</tr>
+			<tr>
+				<th><label for="preferred_password">Your preferred password</label></th>
+				<td>
+					<input type="password" id="id_preferred_password" name="preferred_password" ng-model="supplier.preferred_password" class="form-control" value="{[{supplier.preferred_password}]}" autocomplete="off"> 
+
+					<div ng-show="profile_form.$dirty && profile_form.preferred_password.$error.required && profile_form.preferred_password.$touched">
+						<p class="bg-danger">Please your prefered notification method</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+		</tfoot>
+
+		</table>
+	</form>
+</div>
+</div>
+

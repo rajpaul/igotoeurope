@@ -1,0 +1,242 @@
+<div class='col-md-12 content'>           
+
+    <form name='corporations'>{% csrf_token %}
+        <div class='row'>
+            <div class='col-md-5 form-element'>
+                <h1>List of Product & Services Category</h1>
+                <select name="multiple" id='select1' multiple class="form-control">
+                    {% for category in categories %}
+                        <option value="{{ category.pk }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class='col-md-2' style="padding-top: 60px; text-align: center">
+                <button type="button" id="moveright" class="btn btn-default "> >> </button><br>
+                <button type="button" id="moveleft" class="btn btn-default form-element"> << </button>
+            </div>
+
+            <div class='col-md-5 form-element'>
+                <h1>Selected Category</h1>
+                <select name="categories" id='select2' multiple class="form-control">
+
+                </select>
+            </div>
+
+        </div>
+
+        <div class='row' style="margin-top: 30px;">
+            <div class="col-md-12" style="margin-bottom: 10px;">
+                <p class="text-danger"><strong>Add comma seperated (,) keywords to search corporations</strong>
+                <span style="color:#000; margin-left: 20px;">example: computer, textile, food </span> </p>
+            </div>
+            <div class='col-md-12'>
+                <input type="text" cols="40" rows="5" id="findcat" class="form-control" placeholder="Find category">
+            </div>
+            <div class="col-md-12" style="margin: 20px auto 10px;">
+                <p class="text-danger"><strong>Add comma seperated (,) corporations name to search corporations</strong>
+                <span style="color:#000; margin-left: 20px;">example: computer, textile, food </span> </p>
+            </div>
+            <div class='col-md-12 form-element'>
+                <input type="text" cols="40" rows="5" id="findbuyer" class="form-control" placeholder="Find corporation">
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-9 form-element' style="margin: 20px auto 10px;">
+                <input type='radio' value='yes' name='showall' checked='true'> Show all
+                <input type='radio' value='no' name='showall'> Do not show already selected 
+            </div>
+            <div class='col-md-3 form-element' style="margin: 20px auto 10px; text-align:right; ">
+                <button type="button" id="search" class="btn btn-danger"> Search Corporation </button> 
+            </div> 
+        </div>
+      
+    </form>
+
+    <div class='row'>
+        <div class='col-md-12' id="loader">
+            <img src="/static/images/loader.gif">
+        </div> 
+        <div class='col-md-12 form-element' id="buyers">
+
+
+        </div> 
+    </div>
+    <!-- Search result-->
+    <div class='row bysearch'>
+              
+        <div class="col-md-12">
+            <div id='selectedbuyers'>
+                <div class="alert alert-info tb-header">
+                    <p>Selected List of Corporations</p>
+                </div>
+                <table class="table table-striped table-hover  table-bordered">
+                    <thead>
+                        <tr>
+                            <th width=7%><div align='center'>Sr.#<div></th>
+                            <th width=45%>Corporation Name</th>
+                            <th width=38%>State</th>
+                            <th width=10%><div align='center'>Delete</div></th>
+                        </tr>     
+                    </thead>
+                    <tbody>
+                      
+                        {% include "supplier/selected_buyers.html" %}
+                      
+                    </tbody>
+
+                </table>
+              
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <!-- -->
+    <div class='row'>
+      <div class='col-md-12 form-element'>
+        
+        <div class="panel panel-info tb-header">
+            <div class="panel-heading">
+                Add Corporation / Corporations Manually
+            </div>
+            <div class="panel-body">
+                <form name="manual-add-corp" role="form">
+                <table class="table">
+                    <tr>
+                        <td colspan="2">
+                            <p> The buyers/corporations which you could not find in search and you want submission with them, please add company name below. We will provide submission facility for your added companies.
+                            </p>        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25%">
+                            <label class="" for="search-buyer">Corporations Name:</label>
+                        </td>
+                        <td width="75%" class="hello">
+                            <div class="input-group ">
+                                <input type="text" class="form-control" ng-model="search_buyer" id="manualbuyers" ng-change="searchBuyer(search_buyer)">
+                                <span class="input-group-btn">
+                                    <button id="add-manual-buyer" type="button" class="btn btn-danger">Add Corporation</button>
+                                </span>
+                            </div>
+                            <span ng-show="no_buyers_found">No buyers found yet</span>
+                            <div class="display_buyers" ng-show="show_buyers_list">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Buyers Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="buyer in buyers.results" ng-click="selectBuyer(buyer)">
+                                            <td>{[{ buyer.id }]}</td>
+                                            <td>{[{ buyer.company_name }]}</td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </table>
+                </form>
+          </div>
+        
+        </div>
+
+      </div> 
+    </div>
+    
+
+    <div class='row manualadd'>
+              
+      <div class="col-md-12">
+        <div id='mbuyers'>
+          
+        </div>
+      </div>
+    
+  
+    </div>
+
+    
+    </div>
+    <a class="btn btn-primary" href="/supplier/profile/info/">Save & Continue </a>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+(function(){
+$("#loader").hide();
+    $("#search").on('click', function(event){
+
+        $("#buyers").show();
+        $("#loader").show();
+        var cat_vals = [];
+        $('select#select2 option').each(function() {
+          cat_vals.push($(this).val());
+        });
+        categories = cat_vals.join(", ");
+        // console.log(cat_vals);
+        
+        //categories = $("select[name='categories'] option").serialize();
+        showall = $("input:radio[name='showall']:checked").val();
+        findbuyer = $("#findbuyer").val();
+        findcat = $("#findcat").val();
+        console.log(showall + ', '+findbuyer+', '+findcat);
+        
+        $.ajax({
+            type: "POST",
+            url: "/supplier/search_buyers/",
+            data: {
+              'categories': categories,
+              'showall': showall,
+              'findbuyer': findbuyer,
+              'findcat': findcat
+            },
+
+            success: function(data) {
+                $("#loader").hide();
+                $("#buyers").html(data);
+            },
+            error: function(result) {
+
+            }
+        });
+        
+
+        event.preventDefault();
+    });
+
+    $("#moveright").click(function(){
+      
+      return !$('#select1 option:selected').remove().appendTo('#select2'); 
+      
+    })
+
+    $('#moveleft').click(function() {  
+      return !$('#select2 option:selected').remove().appendTo('#select1');  
+    }); 
+
+/*
+======================== Add manual buyers =========
+*/
+ 
+
+/*
+
+======================== Here goes manually searching buyers with auto suggession=========
+
+*/
+
+
+})(jQuery);
+
+</script>
+
+</div>

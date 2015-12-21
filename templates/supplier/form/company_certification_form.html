@@ -1,0 +1,106 @@
+<div class="row" ng-controller="CompCertificationController">
+<div class="col-md-10">
+	<form novalidate name="comp_certification" action="{% url 'company-certification' %}" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{ supplier.id }}">
+    <input type="hidden" name="company" id="id_company" value="{{ company.id }}">
+		<table class="table">
+		<tbody>
+			<tr>
+				<th width="200"><label for="id_certificate_name">Certificate name</label></th>
+				<td>
+					<input type="text" id="id_certificate_name" name="cert_name" ng-model="comp_certification.certificate_name" class="form-control" value="{[{comp_certification.certificate_name}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.certificate_name.$error.required && comp_certification.certificate_name.$touched">
+						<p  class="bg-warning">Please enter Certificate name.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_description">Description</label></th>
+				<td>
+					<textarea  id="id_description" name="description" ng-model="comp_certification.description" class="form-control" placeholder="Please put 'N/A' if no value available" required autocomplete="off">
+                        {[{comp_certification.description}]}
+                    </textarea>
+
+					<div ng-show="comp_certification.$dirty && comp_certification.description.$error.required && comp_certification.description.$touched">
+						<p  class="bg-warning">Please enter your Description.</p>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_cert_number">Cert number</label></th>
+				<td>
+					<input type="text" id="id_cert_number" name="cert_number" ng-model="comp_certification.cert_number" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_certification.cert_number}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.cert_number.$error.required && comp_certification.cert_number.$touched">
+						<p  class="bg-warning">Please enter your Cert number.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_category">Category</label></th>
+				<td>
+					<input type="text" id="id_category" name="category" ng-model="comp_certification.category" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_certification.category}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.category.$error.required && comp_certification.category.$touched">
+						<p  class="bg-warning">Please enter your Category.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_certification_date">Certification date</label></th>
+				<td>
+					<input type="date" id="id_certification_date" name="certification_date" ng-model="comp_certification.certification_date" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_certification.certification_date}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.certification_date.$error.required && comp_certification.certification_date.$touched">
+						<p  class="bg-warning">Please enter your Certification date.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_expire_date">Expire date</label></th>
+				<td>
+					<input type="date" id="id_expire_date" name="expire_date" ng-model="comp_certification.expire_date" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_certification.expire_date}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.expire_date.$error.required && comp_certification.expire_date.$touched">
+						<p  class="bg-warning">Please enter your Expire date.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_certificate_duration">Certificate duration</label></th>
+				<td>
+					<input type="text" id="id_certificate_duration" name="certificate_duration" ng-model="comp_certification.certificate_duration" class="form-control"  placeholder="Please put 'N/A' if no value available" value="{[{comp_certification.certificate_duration}]}" required autocomplete="off">
+
+					<div ng-show="comp_certification.$dirty && comp_certification.certificate_duration.$error.required && comp_certification.certificate_duration.$touched">
+						<p  class="bg-warning">Please enter your Certificate duration.</p>
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th><label for="id_upload_certificate">Upload certificate</label></th>
+				<td>
+					<input type="file" id="id_upload_certificate" name="upload_certificate" ng-model="comp_license.upload_certificate" class="form-control" placeholder="Please put 'N/A' if no value available" value="{[{comp_license.upload_certificate}]}" required autocomplete="off"> 
+
+					<div ng-show="comp_license.$dirty && comp_license.upload_certificate.$error.required && comp_license.upload_certificate.$touched">
+						<p  class="bg-warning">Please upload your Upload certificate.</p>
+					</div>
+
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+		</tfoot>
+
+		</table>
+	</form>
+</div>
+</div>
+

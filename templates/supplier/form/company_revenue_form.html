@@ -1,0 +1,220 @@
+<div class="row" ng-controller="CompRevController">
+<div class="col-md-10">
+	<form noviolate name="revenue_form" action="/supplier/profile/company/revenue/" method="post">{% csrf_token %}
+	<input type="hidden" name="user" id="id_user" value="{{user.id}}">
+	<input type="hidden" name="supplier" id="id_supplier" value="{{supplier.id}}">
+	<input type="hidden" name="company" id="id_company" value="{{company.id}}">
+		<table class="table">
+		<tbody>
+			<tr>
+				<th width="250"><label for="id_last_year_annual_sale">Last yesr Annual Sale</label></th>
+				<td>
+					<select class="form-control" id="id_last_year_annual_sale" name="last_year_sale" ng-model="revenue.last_year_annual_sale">
+						{% for sal in sales %}
+							<option value="{{sal.0}}" >{{sal.1}}</option>
+						{% endfor %}
+					</select>
+					<input type="hidden" class="form-control" name="last_year_annual_sale" value="{[{revenue.last_year_annual_sale}]}"> 
+				</td>
+			</tr>
+			<tr>
+				<th width="200"><label for="id_two_year_before_annual_sale">2 year previous Annual Sale</label></th>
+				<td>
+					<select class="form-control" id="id_two_year_before_annual_sale" ng-model="revenue.two_year_before_annual_sale">
+						{% for sal in sales %}
+							<option value="{{sal.0}}" >{{sal.1}}</option>
+						{% endfor %}
+					</select>
+					<input type="hidden" class="form-control" name="two_year_before_annual_sale" value="{[{revenue.two_year_before_annual_sale}]}">
+				</td>
+			</tr>
+			<tr>
+				<th width="200"><label for="salutation">3 year previous Annual Sale</label></th>
+				<td>
+					<select class="form-control" id="salutation" ng-model="revenue.three_year_before_annual_sale">
+						{% for sal in sales %}
+							<option value="{{sal.0}}" >{{sal.1}}</option>
+						{% endfor %}
+					</select>
+					<input type="hidden" class="form-control" name="three_year_before_annual_sale" value="{[{revenue.three_year_before_annual_sale}]}"> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_is_company_diverse">Is your company diverse?</label></th>
+				<td>
+					<input type="radio" name="company_diverse" id="id_is_company_diverse_1" ng-model="revenue.is_company_diverse" value="1"> Yes
+					<input type="radio" name="company_diverse" id="id_is_company_diverse_0" ng-model="revenue.is_company_diverse" value="0"> No
+					<input type="hidden" name="is_company_diverse" value="{[{revenue.is_company_diverse}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_is_company_publicly_traded">Is your company publicly traded?</label></th>
+				<td>
+					<input type="radio" name="company_publicly_traded" id="id_is_company_publicly_traded_1" ng-model="revenue.is_company_publicly_traded" value="1"> Yes
+					<input type="radio" name="company_publicly_traded" id="id_is_company_publicly_traded_0" ng-model="revenue.is_company_publicly_traded" value="0"> No
+
+					<input type="hidden" name="is_company_publicly_traded" value="{[{revenue.is_company_publicly_traded}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_is_sba">Are you a small company based on SBA standareds</label></th>
+				<td>
+					<input type="radio" name="sba" id="id_is_sba_1" ng-model="revenue.is_sba" value="1"> Yes
+					<input type="radio" name="sba" id="id_is_sba_0" ng-model="revenue.is_sba" value="0"> No
+
+					<input type="hidden" name="is_sba" value="{[{revenue.is_sba}]}">
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<u><h3>Ownership</h3></u><hr>
+				</th>
+			</tr>
+			<tr>
+				<th><label for="id_minority_owned">Minority Owned</label></th>
+				<td>
+					<input type="radio" name="is_minority_owned" id="id_minority_owned_1" ng-model="revenue.minority_owned" value="1"> Yes
+					<input type="radio" name="is_minority_owned" id="id_minority_owned_0" ng-model="revenue.minority_owned" value="0"> No
+
+					<input type="hidden" name="minority_owned" value="{[{revenue.minority_owned}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_veteron_owned">Veteran Owned</label></th>
+				<td>
+					<input type="radio" name="is_veteron_owned" id="id_veteron_owned_1" ng-model="revenue.veteron_owned" value="1"> Yes
+					<input type="radio" name="is_veteron_owned" id="id_is_company_diverse_0" ng-model="revenue.veteron_owned" value="0"> No
+
+					<input type="hidden" name="veteron_owned" value="{[{revenue.veteron_owned}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_us_citizen_owned">US citizen owned</label></th>
+				<td>
+					<input type="radio" name="is_us_citizen_owned" id="id_us_citizen_owned" ng-model="revenue.us_citizen_owned" value="1"> Yes
+					<input type="radio" name="is_us_citizen_owned" id="id_us_citizen_owned" ng-model="revenue.us_citizen_owned" value="0"> No
+
+					<input type="hidden" name="us_citizen_owned" value="{[{revenue.us_citizen_owned}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_woman_owned">Women Owned</label></th>
+				<td>
+					<input type="radio" name="is_woman_owned" id="id_woman_owned_1" ng-model="revenue.woman_owned" value="1"> Yes
+					<input type="radio" name="is_woman_owned" id="id_woman_owned_0" ng-model="revenue.woman_owned" value="0"> No
+
+					<input type="hidden" name="woman_owned" value="{[{revenue.woman_owned}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_service_disabled_vet">Service Disabled Vet</label></th>
+				<td>
+					<input type="radio" name="is_service_disabled_vet" id="id_service_disabled_vet_1" ng-model="revenue.service_disabled_vet" value="1"> Yes
+					<input type="radio" name="is_service_disabled_vet" id="id_service_disabled_vet_0" ng-model="revenue.service_disabled_vet" value="0"> No
+
+					<input type="hidden" name="service_disabled_vet" value="{[{revenue.service_disabled_vet}]}">
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_owners_ethnicities">Owners Ethnicities</label></th>
+				<td>
+					<table>
+						<tr>
+							<td>
+								<ul class="ethnicity_list">
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_0" ng-model="revenue.owners_ethnicities" value="0">	African American
+									</li>
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_1" ng-model="revenue.owners_ethnicities"  value="1"> 'Native American'	
+									</li>
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_2" ng-model="revenue.owners_ethnicities"  value="2">	Asia Pacific American
+									</li>
+									
+								</ul>
+							</td>
+							<td>
+								<ul class="ethnicity_list">
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_3" ng-model="revenue.owners_ethnicities"  value="3">	Subcontinent Asian American
+									</li>
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_4" ng-model="revenue.owners_ethnicities"  value="4">	Canadian Aboriginal
+									</li>
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_5" ng-model="revenue.owners_ethnicities"  value="5"> 	White (not Hisponic)
+									</li>
+									<li>
+										<input type="radio" name="is_owners_ethnicities" id="id_is_company_diverse_6" ng-model="revenue.owners_ethnicities"  value="6">	Hisponic American
+									</li>
+								</ul>	
+							</td>
+						</tr>
+					</table>
+					
+					<input type="hidden" name="owners_ethnicities" value="{[{revenue.owners_ethnicities}]}">
+
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2"><h2><u>Pyment/Remit To</u></h2><hr></th>
+				<input type="hidden" id="id_address_type" name="address_type" class="form-control" value=3>
+			</tr>
+			<tr>
+				<th><label for="id_address">Address</label></th>
+				<td>
+					<textarea id="id_address" name="address" class="form-control" ng-model="revenue.remit.address" autocomplete="off">
+						{[{ revenue.remit.address}]}
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_country">Country</label></th>
+				<td>
+					<input type="text" id="id_country" name="country" ng-model="revenue.remit.country" class="form-control" value="{[{revenue.remit.country}]}" autocomplete="off"> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_state">State</label></th>
+				<td>
+					<input type="text" id="id_state" name="state" ng-model="revenue.remit.state" class="form-control" value="{[{revenue.remit.state}]}" autocomplete="off"> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="city">City</label></th>
+				<td>
+					<input type="text" id="id_city" name="city" ng-model="revenue.remit.city" class="form-control" value="{[{revenue.remit.city}]}" autocomplete="off"> 
+				</td>
+			</tr>
+			<tr>
+				<th><label for="id_zip_code">Zip Code</label></th>
+				<td>
+					<input type="text" id="id_zip_code" name="zip_code" ng-model="revenue.remit.zip_code" class="form-control" value="{[{revenue.remit.zip_code}]}" autocomplete="off"> 
+				</td>
+			</tr>
+
+			<tr>
+				<th><label for="id_remit_to_email">Remit To Email</label></th>
+				<td>
+					<input type="email" id="id_remit_to_email" ng-model="revenue.remit.remit_to_email" name="remit_to_email" class="form-control" value="{[{revenue.remit_to_email}]}" autocomplete="off">
+
+					<div ng-show="revenue_form.$dirty && revenue_form.remit_to_email.$error.email && revenue_form.remit_to_email.$touched">
+						<p  class="bg-warning">Please enter a valid email.</p>
+					</div>
+				</td>
+			</tr>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">
+					<button class="btn btn-primary">Save & Continue</button>
+				</th>
+			</tr>
+		</tfoot>
+
+		</table>
+	</form>
+</div>
+</div>

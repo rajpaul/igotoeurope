@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block container %}
+	{% include "steps.html" %}
+
+	{% include "supplier/form/company_info_form.html" %}	
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+$('#pre-selected-options').multiSelect({
+    selectableHeader: "<div class='bg-danger'>Selectable Category</div>",
+    selectionHeader: "<div class='bg-danger'>Selected Category</div>"
+});
+
+
+pr.controller('CompInfoController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Supplier Company profile controller...");
+        var sup_id = $("#id_supplier").val();
+        var url = "/supplier/profile/company/info/api/"+sup_id+"/"
+        $http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.comp = data;
+                $scope.capability = data.capability
+                
+        }).error(function() {
+            console.log("no company info")
+        });
+    }
+    $scope.init();
+
+}]);
+
+</script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block page_css %}
+	<link href="/static/css/multiselect.css" media="screen" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+select[multiple], select[size] {
+	height: 150px;
+}
+td.hello {
+	position: relative;
+}
+
+.display_buyers {
+	position: absolute;
+	width: 70%;
+}
+.display_buyers thead {
+	background-color: #333;
+	color: #FFF;
+}
+.display_buyers tbody tr:hover {
+	background-color: #DDD;
+}
+</style>
+{% endblock %}
+
+{% block container %}
+	{% include "steps.html" %}
+
+	{% include "supplier/form/search.html" %}	
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript" src="/static/js/jquery.multi-select.js"></script>
+
+<script type="text/javascript">
+$('#corp-select').multiSelect();
+
+pr.controller('SearchPageController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Search Page controller...");
+        $scope.show_buyers_list = false;
+        $scope.no_buyers_found = false;
+
+        $scope.is_this_step1 = false;
+        $scope.is_this_step2 = false;
+        $scope.is_this_step3 = true;
+    }
+    $scope.init();
+
+    $scope.searchBuyer = function(q) {
+    	console.log(q);
+    	if(q.length > 1) {
+            var url = "/supplier/search/buyer/?q=" + q;
+            $http({method: 'GET', url: url}).
+	            success(function(data, status, headers, config){
+	            	console.log(data.results.length);
+	            	if (data.results.length > 0) {
+	            		$scope.show_buyers_list = true;
+	            		$scope.buyers = data;
+	            		$scope.no_buyers_found = false;	
+	            	} else {
+	            		$scope.no_buyers_found = true;
+	            	}
+            		
+	            
+	        });
+            
+        } else {
+            $scope.show_buyers_list = false;
+        }
+    }
+
+    $scope.selectBuyer = function (buyer) {
+    	$scope.show_buyers_list = false;
+    	console.log(buyer);
+    }
+
+}]);
+
+</script>
+{% endblock %}

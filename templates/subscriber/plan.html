@@ -1,0 +1,77 @@
+<div class="col-md-10 col-md-offset-1">
+	
+	<table class="table plan">
+		<thead>
+			<tr>
+				<th width="500">Plan Comparison</th>
+				{% for plan in packages %}
+					<th width="200">{{ plan.package_name }}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for service in services %}
+				<tr>
+					<td>{{ service.name }}</td>
+					{% for plan in packages %}
+
+							{% if plan in service.package_set.all %}
+								<td class="custom-border"> 
+									<input type="checkbox" checked onclick="return false"> 
+								</td>
+							{% else %}
+								<td class="custom-border"> 
+									<input type="checkbox" onclick="return false"> 
+								</td>
+							{% endif %}
+
+					{% endfor %}
+					
+				</tr>
+			{% endfor %}
+			{% for frequency in frequencies %}
+				<tr>
+					<td> {{ frequency }}</td>
+					{% for plan in packages %}
+						{% for pp in package_plans %}
+							
+							{% if plan == pp.package and frequency == pp.frequency %}
+								<td class="custom-border"> ${{ pp.price }}</td>
+							{% endif %}
+
+						{% endfor %}	
+					{% endfor %}
+					
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				{% for pk in packages %}
+				<td class="custom-border">
+					<select class="form-control" id="{{pk}}">
+					
+						{% for freq in frequencies %}
+						
+							{% for pp in package_plans %}
+								{% if pk == pp.package and freq == pp.frequency %}
+									<option value="{{pp.id}}" data-price="{{pp.price}}">{{ freq }}</option>
+								{% endif %}
+							{% endfor %}
+						{% endfor %}	
+					
+
+					</select>
+					<div style="margin-top:10px;">
+					<button class="btn btn-danger" role="group"  ng-click="buynow('{{pk}}')">Buy Now</button>
+					</div>
+				</td>
+				
+				{% endfor %}
+				
+			</tr>
+			
+		</tfoot>
+	</table>
+</div>

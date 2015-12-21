@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block header %}
+	{% include 'header.html' %}
+{% endblock %}
+
+{% block full_container %}
+<div class="container banner">
+	<div class="row">
+			{% include 'top-menu.html' %}
+	</div>	
+	
+	{% include 'home-container.html' %}
+	
+</div>
+
+{% endblock %}
+
+
+
+{% block footer %}
+	<div class="footer">
+		Copyright &copy 2013 Cloud Custom Solutions. All Rights Reserved.<br/> 
+		Developed & Designed By: <a href="#">Cloud Custom Solutions</a>
+	</div>
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+
+pr.controller('RegistrationController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Registration controller...");
+        
+    }
+    $scope.init();
+
+}]);
+</script>
+{% endblock %}

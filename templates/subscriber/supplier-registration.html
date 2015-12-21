@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="jumbotron">
+			<form name="registrationForm" action="/subscriber/registration/" method="post" novalidate>{% csrf_token %}
+				<table class="table">
+					<tr>
+						<th>Get started now in 3 simple steps</th>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" class="form-control " name="username" placeholder="Username" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="email" class="form-control " name="email" placeholder="Email" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" ng-model="password1" class="form-control " name="password1" placeholder="Password" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" ng-model="password2" class="form-control " name="password2" placeholder="Confirm Password">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" class="" name="terms" required> I agree to the terms and conditions
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" class="btn btn-primary btn-lg btn-block" value="Register" ng-disabled="registrationForm.$invalid" >
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>		
+	</div>
+</div>
+
+{% endblock container %}

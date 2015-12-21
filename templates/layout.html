@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block header %}
+	{% include 'header.html' %}
+{% endblock %}
+{% block full_container %}
+<div class="container">
+	<div class="row">
+			{% include 'top-menu.html' %}
+	</div>	
+	
+	<div class="row mainbody" style="margin-top: 20px;">
+    		<div class="col-md-3 leftmenu" style="padding-left:0px;">
+            {% if user.is_authenticated %}
+    			{% include "supplier/left-menu.html" %}
+            {% endif %}
+    		</div>
+		<div {% if user.is_authenticated %} class="col-md-9" {% else %} class="col-md-12" {% endif %}>
+			{% block container %}
+			{% endblock container %}
+		</div>
+	</div>
+	
+</div>
+
+{% endblock %}
+
+
+{% block site_js %}
+
+<script type="text/javascript">
+var pr = angular.module("pr", [], function ($interpolateProvider) {
+        $interpolateProvider.startSymbol("{[{");
+        $interpolateProvider.endSymbol("}]}");
+});
+
+pr.controller('LeftMenuController',['$scope', '$http', '$location', 
+	function ($scope, $http, $location) {
+    
+    $scope.init = function(){
+        console.log("LeftMenuController controller...");
+        var absUrl = $location.absUrl();
+        if (absUrl.indexOf("/supplier/profile") != -1) {
+        	// $("#collapseOne").slideUp();
+        	$("div.profile").css({"margin-left":'5px', "margin-top": '5px', "margin-bottom": '5px'});
+        	$("#collapseOne").slideDown();
+
+        	if (absUrl.indexOf("/supplier/profile/company/info/") != -1 ) {
+        		$("a[href='/supplier/profile/company/info/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/profile/company/revenue/") != -1 ){
+        		$("a[href='/supplier/profile/company/revenue/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/profile/company/contacts/") != -1 ){
+        		$("a[href='/supplier/profile/company/contacts/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/profile/company/licenses/") != -1 ){
+        		$("a[href='/supplier/profile/company/licenses/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/profile/company/products-services/") != -1 ){
+        		$("a[href='/supplier/profile/company/products-services/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/profile/company/certification/") != -1 ){
+        		$("a[href='/supplier/profile/company/certification/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+        		
+        	} else if (absUrl.indexOf("/supplier/profile/info/") != -1 ){
+        		$("a[href='/supplier/profile/info/']").addClass("active");
+        		$("a[href='/supplier/profile/']").addClass("active");
+        		
+        	} else {
+        		$("a[href='/supplier/profile/']").addClass("active");
+        		
+        	}
+        } else {
+        	$("#collapseOne").slideUp();
+
+        	if (absUrl.indexOf("/supplier/search-corporation/") != -1 ) {
+        		$("a[href='/supplier/search-corporation/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/notification/") != -1 ) {
+        		$("a[href='/supplier/notification/']").addClass("active");
+
+        	} else if (absUrl.indexOf("/supplier/submission-status/") != -1 ) {
+        		$("a[href='/supplier/submission-status/']").addClass("active");
+        	} else {
+        		console.log('hello world!');
+        	}
+        }
+
+    }
+    $scope.init();
+
+
+}]);
+
+</script>
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}
+
+
+{% block footer %}
+	<div class="footer">
+		Copyright & copy 2013 Cloud Custom Solutions. All Rights Reserved.<br/> 
+		Developed & Designed By: <a href="#">Cloud Custom Solutions</a>
+	</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+<div class="col-md-6 col-md-offset-5">
+	<table class="table payment">
+		<thead>
+			<tr>
+				<th width="50%"><h1>Payment Details</h1></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Plan amount</td>
+				<td>$ <span class="plan-amount">{[{planamount}]}</span></td>
+			</tr>
+			<tr>
+				<td>Do you have a coupon code?</td>
+				<td> 
+					<div class="input-group">
+						<input type="text" name="coupon" class="form-control" ng-model="coupon" ng-disabled="coupon_disabled">
+						<span class="input-group-btn">
+							<button class="btn btn-danger"  type="button" ng-click="applyCoupon(coupon)"
+							ng-disabled="coupon_disabled">Apply</button>
+						</span>
+					</div>
+					<div class="message bg-info" ng-show="show_coupon_message">{[{ coupon_message }]}</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Net amount</td>
+				<td>$ <span class="net-amount">{[{netamount}]}</span></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td style="text-align: right;">
+				<form action="/subscriber/payment/create/" method="post">{% csrf_token %}
+					<input type="hidden" value="{[{ppid}]}" name="ppid">
+					<input type="hidden" value="{[{ccid}]}" name="ccid">
+					<input type="hidden" value="{[{planamount}]}" name="plan_amount">
+					<input type="hidden" value="{[{netamount}]}" name="net_amount">
+					<button class="btn btn-primary btn-lg" type="submit">Checkout</button>
+				</form>
+				</td>
+			</tr>
+		</tfoot>
+
+		
+	</table>
+</div>

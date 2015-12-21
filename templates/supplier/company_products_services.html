@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block container %}
+	{% include "steps.html" %}
+	{% include "supplier/form/company_product_service_form.html" %}
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+
+pr.controller('CompProServiceController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Supplier Company Product Service controller...");
+        var sup_id = $("#id_supplier").val();
+        var url = "/supplier/profile/company/products-services/api/"+sup_id+"/"
+        console.log("Supplier ID => " + sup_id)
+        console.log("Url => " + url)
+        $http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.comp_pro_service = data;
+
+        }).error(function() {
+            console.log("no company info")
+        });
+    }
+    $scope.init();
+
+}]);
+
+</script>
+{% endblock %}

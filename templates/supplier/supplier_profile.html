@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block container %}
+	{% include "steps.html" %}
+
+	{% include "supplier/form/profile_form.html" %}	
+{% endblock %}
+
+{% block page_js %}
+<script type="text/javascript">
+	
+pr.controller('SupplierProfileController',['$scope', '$http', function ($scope, $http) {
+    $scope.init = function(){
+        console.log("Supplier profile controller...");
+        var sup_id = $("#id_supplier").val();
+        var url = "/supplier/profile/api/"+sup_id+"/"
+        $http({method: 'GET', url: url}).
+            success(function(data, status, headers, config) {
+                $scope.supplier = data.fields;
+                $("#salutation").val(data.fields.salutation);
+                $("#id_zip_code").val(data.fields.zip_code)
+                $("input:radio[name='notification']").filter('[value="'+data.fields.method_of_notification+'"]').attr('checked', true);
+                
+        });
+    }
+    $scope.init();
+
+}]);
+
+</script>
+{% endblock %}
